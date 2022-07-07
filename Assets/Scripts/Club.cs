@@ -64,7 +64,6 @@ public class Club : MonoBehaviour
     public async Task Activate()
     {
         uhandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-        await uhandle.MoveToPosition(gameObject.transform.position);
         activated = true;
     }
 

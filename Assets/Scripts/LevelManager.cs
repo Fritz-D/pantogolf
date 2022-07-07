@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     }
     async void StartGame()
     {   
-        await GameObject.FindObjectOfType<Club>().Activate();
+        await club.GetComponent<Club>().Activate();
     }
 
     // Update is called once per frame
@@ -52,12 +52,13 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
-        if (ball is not null) { panto.GetComponent<LowerHandle>().Free(); Destroy(ball); }
         LevelData ld = levels[n].GetComponent<LevelData>();
+        ball = ld.ball;
         levels[n].SetActive(true);
-        club.SetActive(false);
+        
         Level level = GameObject.Find("Panto").GetComponent<Level>();
         await level.PlayIntroduction();
+        club.SetActive(false);
         await panto.GetComponent<UpperHandle>().MoveToPosition(ld.cspawn.transform.position);
         club.transform.position = panto.GetComponent<UpperHandle>().GetPosition();
         club.SetActive(true);

@@ -11,6 +11,7 @@ TagManager:
   - ItHandle
   - MeHandle
   - Ball
+  - Club
   layers:
   - Default
   - TransparentFX
