@@ -11,7 +11,6 @@ public class LevelManager : MonoBehaviour
     public GameObject panto;
     private GameObject ball;
     private int levelNumber = 0;
-    private bool gameStarted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +26,7 @@ public class LevelManager : MonoBehaviour
         StartGame();
     }
     async void StartGame()
-    {
-        Level level = GameObject.Find("Panto").GetComponent<Level>();
-        await level.PlayIntroduction();
-        
+    {   
         await GameObject.FindObjectOfType<Club>().Activate();
     }
 
@@ -50,24 +46,29 @@ public class LevelManager : MonoBehaviour
     {
         await ball.GetComponent<GolfBall>().Activate(panto);
     }
-    void LoadLevel(int n)
+    async void LoadLevel(int n)
     {
         if (n < 0 || n >= levels.Length)
         {
             return;
         }
-        LevelData ld = levels[n].GetComponent<LevelData>();
-        club.transform.position = ld.clubPos;
-        club.transform.rotation = Quaternion.Euler(ld.clubRot);
         if (ball is not null) { panto.GetComponent<LowerHandle>().Free(); Destroy(ball); }
-        ball = Instantiate(ballPrefab, ld.ballPos, Quaternion.Euler(ld.ballRot));
-        ball.GetComponent<GolfBall>().lm = this;
+        LevelData ld = levels[n].GetComponent<LevelData>();
+        levels[n].SetActive(true);
+        club.SetActive(false);
+        Level level = GameObject.Find("Panto").GetComponent<Level>();
+        await level.PlayIntroduction();
+        await panto.GetComponent<UpperHandle>().MoveToPosition(ld.cspawn.transform.position);
+        club.transform.position = panto.GetComponent<UpperHandle>().GetPosition();
+        club.SetActive(true);
+        //club.transform.position = ld.cspawn.transform.position;
+        //club.transform.rotation = ld.cspawn.transform.rotation;
         ActivateBall();
 
         //panto.GetComponentInChildren<Camera>().transform.position = ld.cameraPos;
         //panto.GetComponentInChildren<Camera>().transform.rotation = Quaternion.Euler(ld.cameraRot);
         //panto.GetComponentInChildren<Camera>().orthographicSize = ld.cameraSize;
-        levels[n].SetActive(true);
+        
         ball.GetComponent<GolfBall>().goal = GameObject.FindGameObjectsWithTag("Goal")[0];
         
     }

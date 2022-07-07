@@ -14,6 +14,7 @@ public class Club : MonoBehaviour
     private bool shoot = false;
     private float shoot_mag = 0;
     private bool activated = false;
+    private bool intangible = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,30 +36,36 @@ public class Club : MonoBehaviour
     void Update()
     {
         if (!activated) { return; }
-        if (Input.GetKey("space"))
+        if (uhandle.GetComponentInParent<DualPantoSync>().debug)
         {
-            shoot = true;
-            shoot_mag = (GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position).magnitude;
-            playerRb.velocity = Vector3.zero;
+            if (Input.GetKey("space"))
+            {
+                shoot = true;
+                shoot_mag = (GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position).magnitude;
+                playerRb.velocity = Vector3.zero;
+            }
+            if (shoot)
+            {
+                Vector3 vec = GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position;
+                playerRb.AddForce(vec * shoot_mag, ForceMode.Impulse);
+                return;
+            }
+            float forwardInput = Input.GetAxis("Vertical");
+            float sidewaysInput = Input.GetAxis("Horizontal");
+            playerRb.velocity = (transform.forward * sidewaysInput + transform.right * -forwardInput) * speed;
         }
-        if (shoot)
+        else
         {
-            Vector3 vec = GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position;
-            playerRb.AddForce(vec * shoot_mag, ForceMode.Impulse);
-            return;
+            Vector3 err = uhandle.GetPosition() - transform.position;
+            playerRb.velocity = 10f * err;
         }
-        float forwardInput = Input.GetAxis("Vertical");
-        float sidewaysInput = Input.GetAxis("Horizontal");
-        playerRb.velocity = (transform.forward * sidewaysInput  + transform.right * -forwardInput) * speed;
-        //playerRb.MovePosition(uhandle.GetPosition());
     }
 
     public async Task Activate()
     {
-        activated = true;
         uhandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-        await uhandle.SwitchTo(gameObject);
-        uhandle.FreeRotation();
+        await uhandle.MoveToPosition(gameObject.transform.position);
+        activated = true;
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -66,6 +73,17 @@ public class Club : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             shoot = false;
+            if (intangible == false)
+            {
+                intangible = true;
+                playerRb.mass = 0.00001f;
+                Invoke(nameof(resetLayer), 1);
+            }
         }
+    }
+    private void resetLayer()
+    {
+        intangible = false;
+        playerRb.mass = 5f;
     }
 }

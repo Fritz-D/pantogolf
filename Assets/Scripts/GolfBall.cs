@@ -33,6 +33,6 @@ public class GolfBall : MonoBehaviour
     public async Task Activate(GameObject panto)
     {
         lhandle = panto.GetComponent<LowerHandle>();
-        await lhandle.SwitchTo(gameObject);
+        await lhandle.MoveToPosition(gameObject.transform.position);
     }
 }
