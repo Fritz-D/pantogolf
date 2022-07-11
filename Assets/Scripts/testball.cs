@@ -15,7 +15,7 @@ public class testball : MonoBehaviour
     {
         LowerHandle lhandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
         lhandle.Free();
-        await lhandle.SwitchTo(gameObject);
+        await lhandle.SwitchTo(gameObject,20.0f);
     }
     // Update is called once per frame
     void Update()

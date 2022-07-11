@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
    async public void ResumeAfterPause() 
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        if(enemy is not null)
+        if(enemy != null)
         {
             await GameObject.Find("Panto").GetComponent<LowerHandle>().SwitchTo(enemy);
         }
