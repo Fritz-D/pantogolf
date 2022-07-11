@@ -1,6 +1,10 @@
 # pantogolf
 
-handles still can't move (due to lacking battery?)  
 it/me handles get less accurate over time  
 rare crashes  
-probably framework stuff, will reconsider monday  
+1. wände einführen
+2. gameplay muss funktionieren !!!
+3. handle behaviour
+4. introductions
+5. hit counter
+6. keep ball to y=0 
