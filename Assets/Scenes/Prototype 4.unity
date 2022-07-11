@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &140239637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,9 +287,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1649728878}
+  - {fileID: 807618149}
   - {fileID: 1412224249}
   - {fileID: 2115415353}
-  - {fileID: 807618149}
   - {fileID: 1451944500}
   - {fileID: 2019469611}
   - {fileID: 281034728}
@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 281034730}
   - component: {fileID: 281034729}
   - component: {fileID: 281034732}
+  - component: {fileID: 281034733}
   m_Layer: 0
   m_Name: LWall (1)
   m_TagString: Untagged
@@ -413,6 +414,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: these walls
   priority: 8
+--- !u!114 &281034733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281034727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &312796163
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +676,7 @@ GameObject:
   - component: {fileID: 329140652}
   - component: {fileID: 329140651}
   - component: {fileID: 329140650}
+  - component: {fileID: 329140654}
   m_Layer: 0
   m_Name: RWall
   m_TagString: Untagged
@@ -745,6 +762,21 @@ Transform:
   m_Father: {fileID: 941574203}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329140654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329140649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &337962195
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +789,7 @@ GameObject:
   - component: {fileID: 337962199}
   - component: {fileID: 337962198}
   - component: {fileID: 337962197}
+  - component: {fileID: 337962200}
   m_Layer: 0
   m_Name: FWall (1)
   m_TagString: Untagged
@@ -842,6 +875,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337962195}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &337962200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337962195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &403660044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1225,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 140239638}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &807618150
 BoxCollider:
@@ -1270,6 +1318,7 @@ GameObject:
   - component: {fileID: 812159506}
   - component: {fileID: 812159505}
   - component: {fileID: 812159504}
+  - component: {fileID: 812159507}
   m_Layer: 0
   m_Name: FWall (2)
   m_TagString: Untagged
@@ -1355,6 +1404,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812159502}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &812159507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812159502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &939717137 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1644663116637746963, guid: 6668fffe8441b384bb7c9834e2f03712,
@@ -1639,6 +1703,7 @@ GameObject:
   - component: {fileID: 1180485505}
   - component: {fileID: 1180485504}
   - component: {fileID: 1180485503}
+  - component: {fileID: 1180485507}
   m_Layer: 0
   m_Name: FWall
   m_TagString: Untagged
@@ -1724,6 +1789,21 @@ Transform:
   m_Father: {fileID: 941574203}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180485507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180485502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1191333431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6772025421028964510, guid: 1ab5c43a765145a4e9cac7490ee7c6ec,
@@ -1852,6 +1932,7 @@ GameObject:
   - component: {fileID: 1236953701}
   - component: {fileID: 1236953700}
   - component: {fileID: 1236953699}
+  - component: {fileID: 1236953703}
   m_Layer: 0
   m_Name: BWall
   m_TagString: Untagged
@@ -1937,6 +2018,21 @@ Transform:
   m_Father: {fileID: 941574203}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1236953703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236953698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1299633455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,6 +2046,7 @@ GameObject:
   - component: {fileID: 1299633458}
   - component: {fileID: 1299633457}
   - component: {fileID: 1299633460}
+  - component: {fileID: 1299633461}
   m_Layer: 0
   m_Name: LWall (2)
   m_TagString: Untagged
@@ -2051,6 +2148,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: off of
   priority: 9
+--- !u!114 &1299633461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299633455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1386908504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2452,7 @@ GameObject:
   - component: {fileID: 1412224251}
   - component: {fileID: 1412224250}
   - component: {fileID: 1412224253}
+  - component: {fileID: 1412224254}
   m_Layer: 0
   m_Name: LWall
   m_TagString: Untagged
@@ -2360,7 +2473,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 140239638}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1412224250
 BoxCollider:
@@ -2441,6 +2554,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: around this wall
   priority: 7
+--- !u!114 &1412224254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412224248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1451944499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2581,7 @@ GameObject:
   - component: {fileID: 1451944503}
   - component: {fileID: 1451944502}
   - component: {fileID: 1451944501}
+  - component: {fileID: 1451944504}
   m_Layer: 0
   m_Name: RWall (1)
   m_TagString: Untagged
@@ -2538,6 +2667,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451944499}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1451944504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451944499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1454497054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2550,6 +2694,7 @@ GameObject:
   - component: {fileID: 1454497057}
   - component: {fileID: 1454497056}
   - component: {fileID: 1454497055}
+  - component: {fileID: 1454497059}
   m_Layer: 0
   m_Name: LWall
   m_TagString: Untagged
@@ -2635,6 +2780,21 @@ Transform:
   m_Father: {fileID: 941574203}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454497059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454497054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1455801172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2808,7 @@ GameObject:
   - component: {fileID: 1455801175}
   - component: {fileID: 1455801174}
   - component: {fileID: 1455801177}
+  - component: {fileID: 1455801178}
   m_Layer: 0
   m_Name: FWall (3)
   m_TagString: Untagged
@@ -2751,6 +2912,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: around this wall
   priority: 1
+--- !u!114 &1455801178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455801172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1001 &1611727565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2771,7 +2947,7 @@ PrefabInstance:
     - target: {fileID: 6772025421028964506, guid: 1ab5c43a765145a4e9cac7490ee7c6ec,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6772025421028964506, guid: 1ab5c43a765145a4e9cac7490ee7c6ec,
         type: 3}
@@ -3030,6 +3206,7 @@ GameObject:
   - component: {fileID: 1812159076}
   - component: {fileID: 1812159075}
   - component: {fileID: 1812159074}
+  - component: {fileID: 1812159077}
   m_Layer: 0
   m_Name: RWall (1)
   m_TagString: Untagged
@@ -3115,6 +3292,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812159072}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1812159077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812159072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1812269655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,6 +3515,7 @@ GameObject:
   - component: {fileID: 1892730486}
   - component: {fileID: 1892730485}
   - component: {fileID: 1892730484}
+  - component: {fileID: 1892730487}
   m_Layer: 0
   m_Name: RWall (2)
   m_TagString: Untagged
@@ -3408,6 +3601,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892730482}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1892730487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892730482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &1958347521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3517,6 +3725,7 @@ GameObject:
   - component: {fileID: 2019469614}
   - component: {fileID: 2019469613}
   - component: {fileID: 2019469612}
+  - component: {fileID: 2019469615}
   m_Layer: 0
   m_Name: FWall (1)
   m_TagString: Untagged
@@ -3602,6 +3811,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019469610}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2019469615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019469610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0
 --- !u!1 &2087440500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3645,6 +3869,7 @@ GameObject:
   - component: {fileID: 2115415356}
   - component: {fileID: 2115415355}
   - component: {fileID: 2115415354}
+  - component: {fileID: 2115415357}
   m_Layer: 0
   m_Name: RWall
   m_TagString: Untagged
@@ -3665,7 +3890,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 140239638}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2115415354
 BoxCollider:
@@ -3730,3 +3955,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115415352}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2115415357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115415352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
+  isPassable: 0

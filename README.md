@@ -9,3 +9,7 @@ rare crashes
 5. hit counter
 6. keep ball to y=0 
 7. hit sound  
+8. dualpantowalls  
+9. level reset  
+10. level select  
+11. explore mode?  
