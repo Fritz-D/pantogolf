@@ -30,9 +30,10 @@ public class GolfBall : MonoBehaviour
             lm.NextLevel();
         }
     }
-    public async Task Activate(GameObject panto)
+    public async Task Activate()
     {
-        lhandle = panto.GetComponent<LowerHandle>();
-        await lhandle.MoveToPosition(gameObject.transform.position);
+        lhandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
+        lhandle.Free();
+        await lhandle.SwitchTo(gameObject);
     }
 }

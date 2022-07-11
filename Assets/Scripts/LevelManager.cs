@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
 
     async void ActivateBall()
     {
-        await ball.GetComponent<GolfBall>().Activate(panto);
+        await ball.GetComponent<GolfBall>().Activate();
     }
     async void LoadLevel(int n)
     {
@@ -56,8 +56,8 @@ public class LevelManager : MonoBehaviour
         ball = ld.ball;
         levels[n].SetActive(true);
         
-        Level level = GameObject.Find("Panto").GetComponent<Level>();
-        await level.PlayIntroduction();
+        //Level level = GameObject.Find("Panto").GetComponent<Level>();
+        //await level.PlayIntroduction();
         club.SetActive(false);
         await panto.GetComponent<UpperHandle>().MoveToPosition(ld.cspawn.transform.position);
         club.transform.position = panto.GetComponent<UpperHandle>().GetPosition();
