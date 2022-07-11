@@ -65,10 +65,6 @@ public class LevelManager : MonoBehaviour
         //club.transform.position = ld.cspawn.transform.position;
         //club.transform.rotation = ld.cspawn.transform.rotation;
         ActivateBall();
-
-        //panto.GetComponentInChildren<Camera>().transform.position = ld.cameraPos;
-        //panto.GetComponentInChildren<Camera>().transform.rotation = Quaternion.Euler(ld.cameraRot);
-        //panto.GetComponentInChildren<Camera>().orthographicSize = ld.cameraSize;
         
         ball.GetComponent<GolfBall>().goal = GameObject.FindGameObjectsWithTag("Goal")[0];
         
