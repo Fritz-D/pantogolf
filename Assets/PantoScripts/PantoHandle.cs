@@ -146,11 +146,11 @@ namespace DualPantoFramework
         }
 
         /// <summary>
-        /// Let the user controll the rotation
+        /// Get the current position of the handle in Unity coordinates.
         /// </summary>
         public void FreeRotation()
         {
-            if (!pantoSync.debug) pantoSync.UpdateHandlePosition(null, float.NaN, isUpper);
+            pantoSync.UpdateHandlePosition(null, float.NaN, isUpper);
             userControlledRotation = true;
         }
 
@@ -223,7 +223,7 @@ namespace DualPantoFramework
 
         float MaxMovementSpeed()
         {
-            return 99.0f;
+            return 100.0f;
         }
 
         public void Rotate(float rotation)
@@ -233,31 +233,33 @@ namespace DualPantoFramework
 
         public void SetPositions(Vector3 newPosition, float? newRotation, Vector3? newGodObjectPosition)
         {
+            GameObject debugGodObject = pantoSync.GetDebugGodObject(isUpper);
             if (pantoSync.debug && newRotation != null)
             {
                 Debug.Log("setting rotation");
                 GameObject debugObject = pantoSync.GetDebugObject(isUpper);
-                debugObject.transform.eulerAngles = new Vector3(debugObject.transform.eulerAngles.x, (float) newRotation, debugObject.transform.eulerAngles.z);
+                debugObject.transform.eulerAngles = new Vector3(debugObject.transform.eulerAngles.x, (float)newRotation, debugObject.transform.eulerAngles.z);
             }
             if (pantoSync.debug)// && userControlledPosition)
             {
                 GameObject debugObject = pantoSync.GetDebugObject(isUpper);
                 debugObject.transform.position = newPosition;
+                debugGodObject.transform.position = newPosition;
+                debugGodObject.transform.eulerAngles = new Vector3(debugGodObject.transform.eulerAngles.x, (float)newRotation, debugGodObject.transform.eulerAngles.z);
             }
             if (!pantoSync.debug)
             {
                 GameObject debugObject = pantoSync.GetDebugObject(isUpper);
-                debugObject.transform.eulerAngles = new Vector3(debugObject.transform.eulerAngles.x, (float) newRotation, debugObject.transform.eulerAngles.z);
+                debugObject.transform.eulerAngles = new Vector3(debugObject.transform.eulerAngles.x, (float)newRotation, debugObject.transform.eulerAngles.z);
                 debugObject.transform.position = position;
-                GameObject debugGodObject = pantoSync.GetDebugGodObject(isUpper);
                 if (newGodObjectPosition != null)
                 {
                     debugGodObject.transform.position = newGodObjectPosition.Value;
-                    debugGodObject.transform.eulerAngles = new Vector3(debugGodObject.transform.eulerAngles.x, (float) newRotation, debugGodObject.transform.eulerAngles.z);
+                    debugGodObject.transform.eulerAngles = new Vector3(debugGodObject.transform.eulerAngles.x, (float)newRotation, debugGodObject.transform.eulerAngles.z);
                 }
             }
             position = newPosition;
-            if (newRotation != null) rotation = (float) newRotation;
+            if (newRotation != null) rotation = (float)newRotation;
             godObjectPosition = newGodObjectPosition;
         }
 

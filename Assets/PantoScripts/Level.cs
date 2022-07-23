@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace DualPantoFramework
 {
@@ -27,7 +26,6 @@ namespace DualPantoFramework
         {
             speed = introductionSpeed;
             ObjectOfInterest[] gos = UnityEngine.Object.FindObjectsOfType<ObjectOfInterest>();
-            gos = (from go in gos where (go.gameObject.activeInHierarchy || go.gameObject.CompareTag("Club")) select go).ToArray();
             Array.Sort(gos, ((go1, go2) => go2.priority.CompareTo(go1.priority)));
 
             for (int index = 0; index < gos.Length; index++)

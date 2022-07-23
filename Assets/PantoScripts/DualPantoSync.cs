@@ -270,13 +270,11 @@ namespace DualPantoFramework
         {
             if (isUpper)
             {
-                //return debugUpperGodObject;
-                return debugUpperHandle;
+                return debugUpperGodObject;
             }
             else
             {
-                //return debugLowerGodObject;
-                return debugLowerHandle;
+                return debugLowerGodObject;
             }
 
         }
@@ -399,17 +397,17 @@ namespace DualPantoFramework
             debugUpperHandle.transform.localScale = transform.localScale;
             debugUpperHandle.name = "MeHandle";
 
-            //prefab = Resources.Load("MeHandleGodObject");
-            //debugUpperGodObject = Instantiate(prefab) as GameObject;
-            //debugUpperGodObject.transform.position = position;
-            //debugUpperGodObject.name = "MeHandleGodObject";
-            //debugUpperGodObject.tag = "MeHandle";
+            prefab = Resources.Load("MeHandleGodObject");
+            debugUpperGodObject = Instantiate(prefab) as GameObject;
+            debugUpperGodObject.transform.position = position;
+            debugUpperGodObject.name = "MeHandleGodObject";
+            debugUpperGodObject.tag = "MeHandle";
 
-            //prefab = Resources.Load("ItHandleGodObject");
-            //debugLowerGodObject = Instantiate(prefab) as GameObject;
-            //debugLowerGodObject.transform.position = position;
-            //debugLowerGodObject.name = "ItHandleGodObject";
-            //debugLowerGodObject.tag = "ItHandle";
+            prefab = Resources.Load("ItHandleGodObject");
+            debugLowerGodObject = Instantiate(prefab) as GameObject;
+            debugLowerGodObject.transform.position = position;
+            debugLowerGodObject.name = "ItHandleGodObject";
+            debugLowerGodObject.tag = "ItHandle";
         }
 
         void OnDestroy()
@@ -436,31 +434,20 @@ namespace DualPantoFramework
             }
             else
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && upperHandle.IsUserControlled())
                 {
-                    Vector3 position = debugUpperHandle.transform.position;
-                    if (upperHandle.IsRotationUserControlled()) {
-                        float forwardInput = Input.GetAxis("Vertical");
-                        float sidewaysInput = Input.GetAxis("Horizontal");
-                        position += (transform.forward * forwardInput + transform.right * sidewaysInput) * 0.2f;                    
-                            }
-                    upperHandleRot = debugUpperHandle.transform.eulerAngles.y;
-                    //if (upperHandle.IsRotationUserControlled()){
-                    //    float mouseRotation = Input.GetAxis("Horizontal") * debugRotationSpeed * Time.deltaTime * 60f;
-                    //    upperHandleRot += mouseRotation;
-                    //}
+                    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    float mouseRotation = Input.GetAxis("Horizontal") * debugRotationSpeed * Time.deltaTime * 60f;
+                    Vector3 position = new Vector3(mousePosition.x, 0.0f, mousePosition.z);
+                    upperHandleRot = debugUpperHandle.transform.eulerAngles.y + mouseRotation;
                     upperHandle.SetPositions(position, upperHandleRot, null);
                 }
                 if (Input.GetMouseButton(1) && lowerHandle.IsUserControlled())
                 {
                     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    float mouseRotation = Input.GetAxis("Horizontal") * debugRotationSpeed * Time.deltaTime * 60f;
                     Vector3 position = new Vector3(mousePosition.x, 0.0f, mousePosition.z);
-                    lowerHandleRot = debugLowerHandle.transform.eulerAngles.y;
-                    if (lowerHandle.IsRotationUserControlled()){
-                        float mouseRotation = Input.GetAxis("Horizontal") * debugRotationSpeed * Time.deltaTime * 60f;
-                        lowerHandleRot += mouseRotation;
-
-                    }
+                    lowerHandleRot = debugLowerHandle.transform.eulerAngles.y + mouseRotation;
                     lowerHandle.SetPositions(position, lowerHandleRot, null);
                 }
             }
@@ -567,7 +554,7 @@ namespace DualPantoFramework
 
         private static float UnityToPantoRotation(float rotation)
         {
-            return (-rotation) / (180f / Mathf.PI);
+            return (-rotation% 360) / (180f / Mathf.PI);
         }
 
         private static float PantoToUnityRotation(double pantoDegrees)

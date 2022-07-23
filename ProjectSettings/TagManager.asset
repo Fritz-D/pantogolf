@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Powerup
-  - ItTrail
-  - Goal
+  - PantoHandle
   - ItHandle
   - MeHandle
-  - Ball
+  - ItTrail
+  - MeTrail
+  - PerceptionCone
+  - Goal
   - Club
   layers:
   - Default
@@ -21,11 +21,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - HapticTextures
   - BlindMode
   - MixedMode
   - Club
   - Ball
+  - Wall
   - 
   - 
   - 
@@ -40,11 +41,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Handles
+  - Rails
+  - Walls2
+  - VisModeDoom
   m_SortingLayers:
   - name: Default
     uniqueID: 0

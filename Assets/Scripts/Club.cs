@@ -1,88 +1,38 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
 using DualPantoFramework;
-using SpeechIO;
 
 public class Club : MonoBehaviour
 {
-    private UpperHandle uhandle;
-    private SpeechIn speech;
-    public int speed = 10;
-    private Rigidbody playerRb;
-    private bool shoot = false;
-    private float shoot_mag = 0;
-    private bool activated = false;
-    private bool intangible = false;
+    public LevelManager lm;
+    Rigidbody playerRb;
+    public PantoHandle handle;
+    public bool activated = false;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        //await ActivatePlayer();
-        speech = new SpeechIn(onSpeechRecognized);
-        speech.StartListening(new string[] { "Bang" });
-    }
-
-    void onSpeechRecognized(string command)
-    {
-        if (command == "Bang") { 
-            shoot = true;
-            shoot_mag = (GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position).magnitude;
-        }
+        handle = !lm.switchHandles ? (PantoHandle)GameObject.Find("Panto").GetComponent<UpperHandle>() : (PantoHandle)GameObject.Find("Panto").GetComponent<LowerHandle>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!activated) { return; }
-        if (uhandle.GetComponentInParent<DualPantoSync>().debug)
+        if (activated)
         {
-            if (Input.GetKey("space"))
-            {
-                shoot = true;
-                shoot_mag = (GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position).magnitude;
-                playerRb.velocity = Vector3.zero;
-            }
-            if (shoot)
-            {
-                Vector3 vec = GameObject.FindGameObjectWithTag("Ball").transform.position - transform.position;
-                playerRb.AddForce(vec * shoot_mag, ForceMode.Impulse);
-                return;
-            }
-            float forwardInput = Input.GetAxis("Vertical");
-            float sidewaysInput = Input.GetAxis("Horizontal");
-            playerRb.velocity = (transform.forward * sidewaysInput + transform.right * -forwardInput) * speed;
-        }
-        else
-        {
-            Vector3 err = uhandle.GetPosition() - transform.position;
+            Vector3 err = handle.GetPosition() - transform.position;
             playerRb.velocity = 10f * err;
         }
     }
-
-    public async Task Activate()
+    private void OnCollisionEnter(Collision collision)
     {
-        uhandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-        activated = true;
+        this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        Invoke(nameof(reenableClub), 1);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    void reenableClub()
     {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            shoot = false;
-            if (intangible == false)
-            {
-                intangible = true;
-                playerRb.mass = 0.00001f;
-                Invoke(nameof(resetLayer), 1);
-            }
-        }
-    }
-    private void resetLayer()
-    {
-        intangible = false;
-        playerRb.mass = 5f;
+        this.gameObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 }

@@ -10,7 +10,7 @@ public class MovingIt : MonoBehaviour
     async void Start()
     {
         itHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
-        await itHandle.SwitchTo(gameObject, 20f);
+        await itHandle.SwitchTo(gameObject, 50f);
         movementStarted = true;
     }
 
