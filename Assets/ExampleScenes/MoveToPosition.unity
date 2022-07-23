@@ -355,7 +355,7 @@ MonoBehaviour:
   traceShape: 0
   isOnUpper: 0
   description: into this goal
-  priority: 25
+  priority: 50
 --- !u!1 &217808125
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lm: {fileID: 2003399578}
   handle: {fileID: 0}
+  activated: 0
 --- !u!135 &482786668
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -802,7 +803,7 @@ MonoBehaviour:
   traceShape: 0
   isOnUpper: 0
   description: hit this ball
-  priority: 50
+  priority: 25
 --- !u!1 &510244681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1776,7 @@ MonoBehaviour:
   traceShape: 0
   isOnUpper: 0
   description: into this goal
-  priority: 25
+  priority: 50
 --- !u!65 &1433978029
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1951,7 +1952,7 @@ MonoBehaviour:
   traceShape: 1
   isOnUpper: 0
   description: around this wall
-  priority: 20
+  priority: 30
 --- !u!1 &1486125600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,7 +2096,7 @@ MonoBehaviour:
   traceShape: 1
   isOnUpper: 0
   description: and this wall
-  priority: 10
+  priority: 28
 --- !u!1 &1619843439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 826605487606422809, guid: f08d327e9fb42f94d97ba9d1d226d418,
@@ -2336,7 +2337,7 @@ MonoBehaviour:
   traceShape: 0
   isOnUpper: 0
   description: into this goal
-  priority: 25
+  priority: 50
 --- !u!65 &1917270510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2627,4 +2628,4 @@ MonoBehaviour:
   traceShape: 1
   isOnUpper: 0
   description: around this wall
-  priority: 10
+  priority: 30
