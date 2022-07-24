@@ -13,9 +13,12 @@ public class LevelManager : MonoBehaviour
     public GameObject[] levels;
     public SpeechOut sOut;
     public SpeechIn sIn;
+    public AudioSource AS;
+    public AudioClip failSound;
     public bool switchHandles = true;
     public bool collisionHelp = true;
-    int maxlevel = -1;
+    public bool introductions = true;
+    public int maxlevel = -1;
     public int curlevel = -1;
     int hitCount = 0;
     bool levelSelect = false;
@@ -24,7 +27,9 @@ public class LevelManager : MonoBehaviour
             { "one", new List<string>(){ "course one", "level one"} },
             { "two", new List<string>(){ "course two", "level two" } },
             { "three", new List<string>(){ "course three", "level three" } },
-            { "reset", new List<string>(){ "level reset", "reset", "restart", "retry" } }
+            { "four", new List<string>(){ "course four", "level four" } },
+            { "reset", new List<string>(){ "level reset", "reset", "restart", "retry" } },
+            { "introduction", new List<string>(){ "switch introductions" } },
         };
     // Start is called before the first frame update
     void Start()
@@ -63,6 +68,10 @@ public class LevelManager : MonoBehaviour
         
         sOut.Stop(false);
         Debug.Log(command);
+        if (commandDict["introduction"].Contains(command))
+        {
+            introductions = !introductions;
+        }
         if (commandDict["select"].Contains(command))
         {
             await sOut.Speak(command);
@@ -75,12 +84,14 @@ public class LevelManager : MonoBehaviour
         if(levelSelect)
         {
             if (commandDict["one"].Contains(command)) { 
-                LoadLevel(0); 
+                LoadLevel(0);
+                levelSelect = false;
             }
             if (commandDict["two"].Contains(command)) {
                 if (maxlevel >= 0)
                 {
                     LoadLevel(1);
+                    levelSelect = false;
                 }
                 else
                 {
@@ -91,10 +102,23 @@ public class LevelManager : MonoBehaviour
                 if (maxlevel >= 1)
                 {
                     LoadLevel(2);
+                    levelSelect = false;
                 }
                 else
                 {
                     await sOut.Speak("Beat course two first");
+                }
+            }
+            if (commandDict["four"].Contains(command))
+            {
+                if (maxlevel >= 2)
+                {
+                    LoadLevel(3);
+                    levelSelect = false;
+                }
+                else
+                {
+                    await sOut.Speak("Beat course three first");
                 }
             }
         }
@@ -165,6 +189,32 @@ public class LevelManager : MonoBehaviour
         ball.GetComponent<Ball>().activated = true;
     }
 
+    async public void FailedLevel()
+    {
+        AS.PlayOneShot(failSound);
+        club.GetComponent<Club>().activated = false;
+        ball.GetComponent<Ball>().activated = false;
+        collisionHelper.GetComponent<CollisionHelper>().handle.Free();
+        club.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ball.transform.position = new Vector3(0.0f, 0.0f, -6.5f);
+        club.transform.position = new Vector3(0.0f, 0.0f, -4.0f);
+        
+        await sOut.Speak("You fail! Retry.");
+
+        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        collisionHelper.GetComponent<CollisionHelper>().updatePos();
+        await collisionHelper.GetComponent<CollisionHelper>().Activate();
+
+        await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 100.0f);
+
+        levels[curlevel].SetActive(true);
+
+        club.GetComponent<Club>().activated = true;
+        club.GetComponent<Club>().handle.Free();
+        ball.GetComponent<Ball>().activated = true;
+    }
+
     public async void NextHit()
     {
         hitCount++;
@@ -177,8 +227,8 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
-        int[] parScore = { 2, 4, 5 };
-        string[] underScore = { "par", "eagle", "albatross", "condor" };
+        int[] parScore = { 2, 4, 5, 4 };
+        string[] underScore = { "on par", "birdie",  "eagle", "albatross", "condor" };
         string[] overScore = { "", "double ", "triple ", "quadrouple ", "quintouple ", "sextouple ", "septouple ", "octouple "};
         string score = "";
         if(hitCount == 1) 
@@ -211,6 +261,7 @@ public class LevelManager : MonoBehaviour
     }
     async Task IntroduceLevel()
     {
+        if (!introductions) { return; }
         Level l = new Level();
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();

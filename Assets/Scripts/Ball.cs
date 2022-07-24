@@ -28,6 +28,11 @@ public class Ball : MonoBehaviour
             lm.levels[lm.curlevel].SetActive(false);
             lm.LevelOver();
         }
+        if (activated && other.CompareTag("Hole"))
+        {
+            lm.levels[lm.curlevel].SetActive(false);
+            lm.FailedLevel();
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {

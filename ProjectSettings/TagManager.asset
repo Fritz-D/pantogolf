@@ -12,6 +12,7 @@ TagManager:
   - PerceptionCone
   - Goal
   - Club
+  - Hole
   layers:
   - Default
   - TransparentFX
