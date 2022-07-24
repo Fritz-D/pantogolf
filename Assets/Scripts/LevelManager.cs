@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     {
         sOut = new SpeechOut();
         sIn = new SpeechIn(onSpeechRecognized);
-        sIn.StartListening(new string[] { "level select", "level reset", "explore", "help", "quit", "level one", "level two", "level three" });
+        sIn.StartListening(new string[] { "level select", "level reset", "level one", "level two", "level three" });
         for (int i = 0; i < levels.Length; i++)
         {
             levels[i].SetActive(false);
