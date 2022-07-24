@@ -223,7 +223,7 @@ namespace DualPantoFramework
 
         float MaxMovementSpeed()
         {
-            return 100.0f;
+            return 50.0f;
         }
 
         public void Rotate(float rotation)
@@ -273,6 +273,7 @@ namespace DualPantoFramework
             for (int i = 0; i < cornerObjects.Count; i++)
             {
                 await SwitchTo(cornerObjects[i], speed);
+                await Task.Delay(300);
             }
             await SwitchTo(cornerObjects[0], speed);
         }

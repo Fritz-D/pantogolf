@@ -26,11 +26,13 @@ public class Ball : MonoBehaviour
         if (activated && other.CompareTag("Goal"))
         {
             lm.levels[lm.curlevel].SetActive(false);
+            activated = false;
             lm.LevelOver();
         }
         if (activated && other.CompareTag("Hole"))
         {
             lm.levels[lm.curlevel].SetActive(false);
+            activated = false;
             lm.FailedLevel();
         }
     }

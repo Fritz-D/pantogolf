@@ -23,7 +23,7 @@ public class CollisionHelper : MonoBehaviour
     
     public async Task Activate()
     {
-        await handle.SwitchTo(gameObject, 100f);
+        await handle.SwitchTo(gameObject, 10.0f);
     }
     public void updatePos()
     {

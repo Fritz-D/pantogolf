@@ -250,7 +250,7 @@ public class LevelManager : MonoBehaviour
         {
             if (hitCount - parScore[levelnum] < 9)
             {
-                score = overScore[hitCount - parScore[levelnum]] + "bogey";
+                score = overScore[hitCount - parScore[levelnum]-1] + "bogey";
             }
             else
             {
@@ -265,6 +265,8 @@ public class LevelManager : MonoBehaviour
         Level l = new Level();
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
-        await l.PlayIntroduction(10, 300);
+        await l.PlayIntroduction(20.0f, 2000);
+        collisionHelper.GetComponent<CollisionHelper>().handle.Free();
+        club.GetComponent<Club>().handle.Free();
     }
 }

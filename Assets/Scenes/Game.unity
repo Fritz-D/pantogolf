@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 516387067}
   - component: {fileID: 516387066}
   m_Layer: 13
-  m_Name: Cube
+  m_Name: Cube (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,7 +1054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &565760610
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,7 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632179102}
   m_Layer: 13
-  m_Name: GameObject
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,7 +1095,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632179101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.449, y: 0, z: 0}
+  m_LocalPosition: {x: -0.47, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613743629}
@@ -1318,7 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 778174381}
   m_Layer: 13
-  m_Name: GameObject
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,7 +1332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778174380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.38, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1436667924}
@@ -1983,7 +1983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1265295534}
   m_Layer: 13
-  m_Name: GameObject (1)
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2013,7 +2013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386206818}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameObject (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2257,7 +2257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 1
   isOnUpper: 0
-  description: around this wall
+  description: and this wall
   priority: 30
 --- !u!1 &1613743628
 GameObject:
@@ -2371,8 +2371,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 1
   isOnUpper: 0
-  description: and this wall
-  priority: 28
+  description: around this wall
+  priority: 32
 --- !u!1 &1619843439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 826605487606422809, guid: f08d327e9fb42f94d97ba9d1d226d418,
@@ -2514,7 +2514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764794777}
   m_Layer: 13
-  m_Name: GameObject
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2830,8 +2830,8 @@ MonoBehaviour:
   - {fileID: 565760609}
   AS: {fileID: 10191832}
   failSound: {fileID: 8300000, guid: 428caa1be8f184f2598f815d501f5ed0, type: 3}
-  switchHandles: 0
-  collisionHelp: 0
+  switchHandles: 1
+  collisionHelp: 1
   introductions: 1
   maxlevel: -1
   curlevel: -1
