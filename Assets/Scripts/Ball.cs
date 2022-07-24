@@ -25,9 +25,8 @@ public class Ball : MonoBehaviour
     {
         if (activated && other.CompareTag("Goal"))
         {
-            other.gameObject.SetActive(false);
+            lm.levels[lm.curlevel].SetActive(false);
             lm.LevelOver();
-           
         }
     }
     private void OnCollisionEnter(Collision collision)

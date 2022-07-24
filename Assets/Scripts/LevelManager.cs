@@ -15,16 +15,33 @@ public class LevelManager : MonoBehaviour
     public SpeechIn sIn;
     public bool switchHandles = true;
     public bool collisionHelp = true;
-    int maxlevel = 0;
-    int curlevel = -1;
+    int maxlevel = -1;
+    public int curlevel = -1;
     int hitCount = 0;
     bool levelSelect = false;
+    Dictionary<string, List<string>> commandDict = new Dictionary<string, List<string>>(){
+            { "select", new List<string>(){ "level select", "course select"} },
+            { "one", new List<string>(){ "course one", "level one"} },
+            { "two", new List<string>(){ "course two", "level two" } },
+            { "three", new List<string>(){ "course three", "level three" } },
+            { "reset", new List<string>(){ "level reset", "reset", "restart", "retry" } }
+        };
     // Start is called before the first frame update
     void Start()
     {
         sOut = new SpeechOut();
         sIn = new SpeechIn(onSpeechRecognized);
-        sIn.StartListening(new string[] { "level select", "level reset", "level one", "level two", "level three" });
+
+        List<string> strings = new List<string>();
+        foreach(var kvp in commandDict)
+        {
+            foreach(string s in kvp.Value)
+            {
+                strings.Add(s); // build list of strings according to dict
+            }
+        }
+
+        sIn.StartListening(strings.ToArray()); //init listener
         for (int i = 0; i < levels.Length; i++)
         {
             levels[i].SetActive(false);
@@ -39,15 +56,16 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        LoadLevel(maxlevel);
+        LoadLevel(0);
     }
     async void onSpeechRecognized(string command)
     {
         
         sOut.Stop(false);
-        await sOut.Speak(command);
-        if (command == "level select")
+        Debug.Log(command);
+        if (commandDict["select"].Contains(command))
         {
+            await sOut.Speak(command);
             club.GetComponent<Club>().handle.Freeze();
             collisionHelper.GetComponent<CollisionHelper>().handle.Free();
             collisionHelper.GetComponent<CollisionHelper>().handle.Freeze();
@@ -56,15 +74,35 @@ public class LevelManager : MonoBehaviour
         }
         if(levelSelect)
         {
-            if (command == "level one") { LoadLevel(0); }
-            if (command == "level two") { LoadLevel(1); }
-            if (command == "level three") { LoadLevel(2); }
+            if (commandDict["one"].Contains(command)) { 
+                LoadLevel(0); 
+            }
+            if (commandDict["two"].Contains(command)) {
+                if (maxlevel >= 0)
+                {
+                    LoadLevel(1);
+                }
+                else
+                {
+                    await sOut.Speak("Beat course one first");
+                }
+            }
+            if (commandDict["three"].Contains(command)) {
+                if (maxlevel >= 1)
+                {
+                    LoadLevel(2);
+                }
+                else
+                {
+                    await sOut.Speak("Beat course two first");
+                }
+            }
         }
-        if(command == "level reset")
+        if(commandDict["reset"].Contains(command))
         {
             LoadLevel(curlevel);
         }
-        Debug.Log(command);
+        
     }
     // Update is called once per frame
     void Update()
@@ -90,7 +128,7 @@ public class LevelManager : MonoBehaviour
 
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
-        if (curlevel == levels.Length-1) { return; }
+        if (curlevel == levels.Length-1) { await sOut.Speak("You win the game.");  return; }
         LoadLevel(curlevel + 1);
     }
 
@@ -104,7 +142,12 @@ public class LevelManager : MonoBehaviour
         club.transform.position = new Vector3(0.0f, 0.0f, -4.0f);
         club.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+        for (int i = 0; i < levels.Length; i++)
+        {
+            levels[i].SetActive(false);
+        }
         levels[levelnum].SetActive(true);
+        await sOut.Speak("Course " + (levelnum+1).ToString());
         await IntroduceLevel();
 
         curlevel = levelnum;
