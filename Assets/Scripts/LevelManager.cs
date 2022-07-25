@@ -58,7 +58,6 @@ public class LevelManager : MonoBehaviour
             ObjectOfInterest[] gos = UnityEngine.Object.FindObjectsOfType<ObjectOfInterest>(true);
             for (int i = 0; i < gos.Length; i++)
             {
-
                 gos[i].isOnUpper = !gos[i].isOnUpper;
             }
         }
@@ -189,9 +188,9 @@ public class LevelManager : MonoBehaviour
 
         
         await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 10.0f);
-
-        club.GetComponent<Club>().activated = true;
         club.GetComponent<Club>().handle.Free();
+        club.GetComponent<Club>().activated = true;
+        
         ball.GetComponent<Ball>().activated = true;
     }
 
@@ -216,9 +215,7 @@ public class LevelManager : MonoBehaviour
 
         levels[curlevel].SetActive(true);
 
-        club.GetComponent<Club>().activated = true;
-        club.GetComponent<Club>().handle.Free();
-        ball.GetComponent<Ball>().activated = true;
+        Invoke(nameof(ReactivateAll), 500);
     }
 
     public async void NextHit()
@@ -235,7 +232,7 @@ public class LevelManager : MonoBehaviour
         }
         int[] parScore = { 2, 4, 5, 4 };
         string[] underScore = { "par", "birdie",  "eagle", "albatross", "condor" };
-        string[] overScore = { "", "tor ", "tor ", "tor ", "tor ", "tor ", "tor ", "tor " };
+        string[] overScore = { "", "double ", "triple ", "quadrouple ", "quintouple ", "sextouple ", "septouple ", "octouple " };
         string score = "";
         if(hitCount == 1) 
         { 
@@ -249,7 +246,7 @@ public class LevelManager : MonoBehaviour
             }
             else 
             { 
-                score = "absurd gut"; 
+                score = "insane"; 
             }
         }
         else
@@ -260,10 +257,10 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                score = "tor";
+                score = "birdie";
             }
         }
-        await sOut.Speak(score, 1.0f, SpeechBase.LANGUAGE.GERMAN);
+        await sOut.Speak(score, 1.0f, SpeechBase.LANGUAGE.ENGLISH);
     }
     async Task IntroduceLevel()
     {
@@ -274,5 +271,12 @@ public class LevelManager : MonoBehaviour
         await l.PlayIntroduction(2.5f, 1000);
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
+    }
+
+    void ReactivateAll()
+    {
+        club.GetComponent<Club>().activated = true;
+        club.GetComponent<Club>().handle.Free();
+        ball.GetComponent<Ball>().activated = true;
     }
 }
