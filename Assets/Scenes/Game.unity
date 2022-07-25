@@ -1511,7 +1511,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422809, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -2238,6 +2238,7 @@ GameObject:
   - component: {fileID: 1436667926}
   - component: {fileID: 1436667925}
   - component: {fileID: 1436667928}
+  - component: {fileID: 1436667929}
   m_Layer: 13
   m_Name: Wall (1)
   m_TagString: Untagged
@@ -2339,6 +2340,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: and this wall
   priority: 30
+--- !u!114 &1436667929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436667923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 0
+  isPassable: 0
 --- !u!1 &1613743628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,6 +2368,7 @@ GameObject:
   - component: {fileID: 1613743631}
   - component: {fileID: 1613743630}
   - component: {fileID: 1613743633}
+  - component: {fileID: 1613743634}
   m_Layer: 13
   m_Name: Wall (2)
   m_TagString: Untagged
@@ -2453,6 +2470,21 @@ MonoBehaviour:
   isOnUpper: 0
   description: around this wall
   priority: 32
+--- !u!114 &1613743634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613743628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 0
+  isPassable: 0
 --- !u!1 &1619843439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 826605487606422809, guid: f08d327e9fb42f94d97ba9d1d226d418,
@@ -3020,6 +3052,7 @@ GameObject:
   - component: {fileID: 2145779892}
   - component: {fileID: 2145779891}
   - component: {fileID: 2145779894}
+  - component: {fileID: 2145779895}
   m_Layer: 13
   m_Name: Wall
   m_TagString: Untagged
@@ -3121,3 +3154,18 @@ MonoBehaviour:
   isOnUpper: 0
   description: around this wall
   priority: 30
+--- !u!114 &2145779895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145779889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 0
+  isPassable: 0

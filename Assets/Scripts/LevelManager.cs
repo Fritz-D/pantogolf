@@ -253,7 +253,7 @@ public class LevelManager : MonoBehaviour
         {
             if (hitCount - parScore[levelnum] < 9)
             {
-                score = overScore[hitCount - parScore[levelnum]-1] + "";
+                score = overScore[hitCount - parScore[levelnum]-1] + "bogey";
             }
             else
             {
@@ -271,12 +271,12 @@ public class LevelManager : MonoBehaviour
         await l.PlayIntroduction(2.5f, 1000);
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
+        await sOut.Speak("Now!");
     }
 
     void ReactivateAll()
     {
         club.GetComponent<Club>().activated = true;
-        club.GetComponent<Club>().handle.Free();
         ball.GetComponent<Ball>().activated = true;
     }
 }
