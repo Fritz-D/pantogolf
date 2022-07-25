@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public SpeechIn sIn;
     public AudioSource AS;
     public AudioClip failSound;
+    public AudioClip hitSound1;
+    public AudioClip hitSound2;
     public bool switchHandles = true;
     public bool collisionHelp = true;
     public bool introductions = true;
@@ -23,13 +25,13 @@ public class LevelManager : MonoBehaviour
     int hitCount = 0;
     bool levelSelect = false;
     Dictionary<string, List<string>> commandDict = new Dictionary<string, List<string>>(){
-            { "select", new List<string>(){ "level select", "course select"} },
-            { "one", new List<string>(){ "course one", "level one"} },
-            { "two", new List<string>(){ "course two", "level two" } },
-            { "three", new List<string>(){ "course three", "level three" } },
-            { "four", new List<string>(){ "course four", "level four" } },
-            { "reset", new List<string>(){ "level reset", "reset", "restart", "retry" } },
-            { "introduction", new List<string>(){ "switch introductions" } },
+            { "select", new List<string>(){ "level wählen", "kurs wählen"} },
+            { "one", new List<string>(){ "kurs eins", "level eins"} },
+            { "two", new List<string>(){ "kurs zwei", "level zwei" } },
+            { "three", new List<string>(){ "kurs drei", "level drei" } },
+            { "four", new List<string>(){ "kurs vier", "level vier" } },
+            { "reset", new List<string>(){ "level zurücksetzen", "kurs zurücksetzen", "zurücksetzen", "neustarten", "wiederversuchen" } },
+            { "introduction", new List<string>(){ "Einführungen wechseln" } },
         };
     // Start is called before the first frame update
     void Start()
@@ -74,7 +76,7 @@ public class LevelManager : MonoBehaviour
         }
         if (commandDict["select"].Contains(command))
         {
-            await sOut.Speak(command);
+            await sOut.Speak(command, 1.0f, SpeechBase.LANGUAGE.GERMAN);
             club.GetComponent<Club>().handle.Freeze();
             collisionHelper.GetComponent<CollisionHelper>().handle.Free();
             collisionHelper.GetComponent<CollisionHelper>().handle.Freeze();
@@ -95,7 +97,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    await sOut.Speak("Beat course one first");
+                    await sOut.Speak("Spiel level eins zuerst", 1.0f, SpeechBase.LANGUAGE.GERMAN);
                 }
             }
             if (commandDict["three"].Contains(command)) {
@@ -106,7 +108,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    await sOut.Speak("Beat course two first");
+                    await sOut.Speak("Spiel level zwei zuerst", 1.0f, SpeechBase.LANGUAGE.GERMAN);
                 }
             }
             if (commandDict["four"].Contains(command))
@@ -118,7 +120,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    await sOut.Speak("Beat course three first");
+                    await sOut.Speak("Spiel level drei zuerst", 1.0f, SpeechBase.LANGUAGE.GERMAN);
                 }
             }
         }
@@ -140,6 +142,8 @@ public class LevelManager : MonoBehaviour
     }
     async public void LevelOver()
     {
+        collisionHelper.GetComponent<CollisionHelper>().handle.Free();
+        club.GetComponent<Club>().handle.Free();
         collisionHelper.GetComponent<CollisionHelper>().handle.Freeze();
         club.GetComponent<Club>().handle.Freeze();
         levels[curlevel].SetActive(false);
@@ -152,7 +156,7 @@ public class LevelManager : MonoBehaviour
 
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
-        if (curlevel == levels.Length-1) { await sOut.Speak("You win the game.");  return; }
+        if (curlevel == levels.Length-1) { await sOut.Speak("Du gewinnst.", 1.0f, SpeechBase.LANGUAGE.GERMAN);  return; }
         LoadLevel(curlevel + 1);
     }
 
@@ -162,6 +166,7 @@ public class LevelManager : MonoBehaviour
         club.GetComponent<Club>().activated = false;
         ball.GetComponent<Ball>().activated = false;
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
+        collisionHelper.GetComponent<CollisionHelper>().handle.Freeze();
         ball.transform.position = new Vector3(0.0f, 0.0f, -6.5f);
         club.transform.position = new Vector3(0.0f, 0.0f, -4.0f);
         club.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -171,7 +176,7 @@ public class LevelManager : MonoBehaviour
             levels[i].SetActive(false);
         }
         levels[levelnum].SetActive(true);
-        await sOut.Speak("Course " + (levelnum+1).ToString());
+        await sOut.Speak("Kurs " + (levelnum+1).ToString(), 1.0f, SpeechBase.LANGUAGE.GERMAN);
         await IntroduceLevel();
 
         curlevel = levelnum;
@@ -179,10 +184,11 @@ public class LevelManager : MonoBehaviour
         
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         collisionHelper.GetComponent<CollisionHelper>().updatePos();
+        collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         await collisionHelper.GetComponent<CollisionHelper>().Activate();
 
         
-        await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 100.0f);
+        await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 10.0f);
 
         club.GetComponent<Club>().activated = true;
         club.GetComponent<Club>().handle.Free();
@@ -200,13 +206,13 @@ public class LevelManager : MonoBehaviour
         ball.transform.position = new Vector3(0.0f, 0.0f, -6.5f);
         club.transform.position = new Vector3(0.0f, 0.0f, -4.0f);
         
-        await sOut.Speak("You fail! Retry.");
+        await sOut.Speak("", 1.0f, SpeechBase.LANGUAGE.GERMAN);
 
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         collisionHelper.GetComponent<CollisionHelper>().updatePos();
         await collisionHelper.GetComponent<CollisionHelper>().Activate();
 
-        await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 100.0f);
+        await club.GetComponent<Club>().handle.MoveToPosition(club.transform.position, 10.0f);
 
         levels[curlevel].SetActive(true);
 
@@ -218,7 +224,7 @@ public class LevelManager : MonoBehaviour
     public async void NextHit()
     {
         hitCount++;
-        await sOut.Speak(hitCount.ToString(), 2);
+        await sOut.Speak(hitCount.ToString(), 2, SpeechBase.LANGUAGE.GERMAN);
     }
 
     public async Task LevelOverSound(int levelnum)
@@ -228,8 +234,8 @@ public class LevelManager : MonoBehaviour
             return;
         }
         int[] parScore = { 2, 4, 5, 4 };
-        string[] underScore = { "on par", "birdie",  "eagle", "albatross", "condor" };
-        string[] overScore = { "", "double ", "triple ", "quadrouple ", "quintouple ", "sextouple ", "septouple ", "octouple "};
+        string[] underScore = { "par", "birdie",  "eagle", "albatross", "condor" };
+        string[] overScore = { "", "tor ", "tor ", "tor ", "tor ", "tor ", "tor ", "tor " };
         string score = "";
         if(hitCount == 1) 
         { 
@@ -243,21 +249,21 @@ public class LevelManager : MonoBehaviour
             }
             else 
             { 
-                score = "insane"; 
+                score = "absurd gut"; 
             }
         }
         else
         {
             if (hitCount - parScore[levelnum] < 9)
             {
-                score = overScore[hitCount - parScore[levelnum]-1] + "bogey";
+                score = overScore[hitCount - parScore[levelnum]-1] + "";
             }
             else
             {
-                score = "horrendous bogey";
+                score = "tor";
             }
         }
-        await sOut.Speak(score);
+        await sOut.Speak(score, 1.0f, SpeechBase.LANGUAGE.GERMAN);
     }
     async Task IntroduceLevel()
     {
@@ -265,7 +271,7 @@ public class LevelManager : MonoBehaviour
         Level l = new Level();
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
-        await l.PlayIntroduction(20.0f, 2000);
+        await l.PlayIntroduction(2.5f, 1000);
         collisionHelper.GetComponent<CollisionHelper>().handle.Free();
         club.GetComponent<Club>().handle.Free();
     }

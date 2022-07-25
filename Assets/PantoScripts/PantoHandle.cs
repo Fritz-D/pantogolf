@@ -273,7 +273,7 @@ namespace DualPantoFramework
             for (int i = 0; i < cornerObjects.Count; i++)
             {
                 await SwitchTo(cornerObjects[i], speed);
-                await Task.Delay(300);
+                await Task.Delay(2000);
             }
             await SwitchTo(cornerObjects[0], speed);
         }

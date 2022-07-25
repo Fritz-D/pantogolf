@@ -8,10 +8,12 @@ public class Ball : MonoBehaviour
 {
     public LevelManager lm;
     public PantoHandle handle;
+    Rigidbody playerRB;
     public bool activated = false;
     // Start is called before the first frame update
     void Start()
     {
+        playerRB = this.GetComponent<Rigidbody>();
         handle = lm.switchHandles ? (PantoHandle)GameObject.Find("Panto").GetComponent<UpperHandle>() : (PantoHandle)GameObject.Find("Panto").GetComponent<LowerHandle>();
 
     }
@@ -40,6 +42,8 @@ public class Ball : MonoBehaviour
     {
         if (activated && collision.gameObject.CompareTag("Club"))
         {
+            lm.AS.PlayOneShot(lm.hitSound1, 0.5f);
+            playerRB.AddForce((this.transform.position - collision.gameObject.transform.position).normalized, ForceMode.Impulse);
             lm.NextHit();
         }
     }

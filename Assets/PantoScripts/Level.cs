@@ -53,7 +53,7 @@ namespace DualPantoFramework
                     children.Add(child.gameObject);
                 }
                 children.Sort((GameObject g1, GameObject g2) => g1.name.CompareTo(g2.name));
-                tasks[1] = pantoHandle.TraceObjectByPoints(children, speed/5);
+                tasks[1] = pantoHandle.TraceObjectByPoints(children, speed);
             }
             else
             {
